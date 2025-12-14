@@ -1,0 +1,1 @@
+{'optimizer_type': 'adamw', 'learning_rate': 0.0001, 'weight_decay': 1e-05, 'momentum': 0.9, 'scheduler_type': 'cosine', 'scheduler_warmup_epochs': 5, 'scheduler_min_lr': 1e-06, 'step_size': 10, 'step_gamma': 0.1, 'plateau_patience': 5, 'plateau_factor': 0.5, 'grad_clip': 1.0}

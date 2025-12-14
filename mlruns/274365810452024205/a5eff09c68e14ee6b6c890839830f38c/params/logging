@@ -1,0 +1,1 @@
+{'use_mlflow': True, 'mlflow_experiment_name': 'cat_breeds_classification', 'mlflow_tracking_uri': 'mlruns', 'checkpoint_dir': 'outputs/checkpoints', 'save_best_only': False, 'save_last': True, 'log_every_n_steps': 10, 'save_confusion_matrix': True, 'save_per_class_metrics': True}

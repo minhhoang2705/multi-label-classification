@@ -1,0 +1,1 @@
+{'batch_size': 32, 'num_epochs': 50, 'accumulation_steps': 1, 'num_folds': 5, 'fold_to_train': None, 'early_stopping': True, 'early_stopping_patience': 10, 'early_stopping_metric': 'macro_f1', 'early_stopping_mode': 'max', 'use_amp': True, 'device': 'cuda', 'seed': 42, 'deterministic': False}

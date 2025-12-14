@@ -1,0 +1,14 @@
+artifact_uri: /Users/minhtranh/Works/Projects/multi-label-classificiation/mlruns/274365810452024205/a5eff09c68e14ee6b6c890839830f38c/artifacts
+end_time: 1765720086451
+entry_point_name: ''
+experiment_id: '274365810452024205'
+lifecycle_stage: active
+run_id: a5eff09c68e14ee6b6c890839830f38c
+run_name: fold_0
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1765719981631
+status: 4
+tags: []
+user_id: minhtranh

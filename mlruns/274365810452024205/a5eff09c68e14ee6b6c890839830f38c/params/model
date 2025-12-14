@@ -1,0 +1,1 @@
+{'name': 'resnet50', 'pretrained': True, 'num_classes': 67, 'freeze_backbone': False, 'freeze_epochs': 0, 'dropout': 0.2, 'drop_path_rate': 0.0}
