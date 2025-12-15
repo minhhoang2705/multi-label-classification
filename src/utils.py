@@ -261,6 +261,25 @@ class GradualWarmupScheduler:
         """Get last learning rate."""
         return [param_group['lr'] for param_group in self.optimizer.param_groups]
 
+    def state_dict(self):
+        """Return the state of the scheduler as a dict."""
+        state = {
+            'warmup_epochs': self.warmup_epochs,
+            'base_lr': self.base_lr,
+            'current_epoch': self.current_epoch
+        }
+        if self.after_scheduler is not None:
+            state['after_scheduler'] = self.after_scheduler.state_dict()
+        return state
+
+    def load_state_dict(self, state_dict):
+        """Load the scheduler state."""
+        self.warmup_epochs = state_dict['warmup_epochs']
+        self.base_lr = state_dict['base_lr']
+        self.current_epoch = state_dict['current_epoch']
+        if self.after_scheduler is not None and 'after_scheduler' in state_dict:
+            self.after_scheduler.load_state_dict(state_dict['after_scheduler'])
+
 
 def mixup_data(x: torch.Tensor, y: torch.Tensor, alpha: float = 0.2):
     """

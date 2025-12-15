@@ -120,7 +120,8 @@ class MetricsCalculator:
         targets = np.array(self.all_targets)
         
         precision, recall, f1, support = precision_recall_fscore_support(
-            targets, preds, average=None, zero_division=0
+            targets, preds, average=None, zero_division=0,
+            labels=np.arange(self.num_classes)
         )
         
         per_class = {}

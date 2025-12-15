@@ -3,10 +3,15 @@ Main training script with CLI interface.
 """
 
 import sys
+import os
 from pathlib import Path
 
 # Add src to path
 sys.path.insert(0, str(Path(__file__).parent.parent))
+
+# Set Hugging Face cache directory to avoid permission issues
+os.environ['HF_HOME'] = str(Path(__file__).parent.parent / '.cache' / 'huggingface')
+os.environ['TORCH_HOME'] = str(Path(__file__).parent.parent / '.cache' / 'torch')
 
 import argparse
 from dataclasses import asdict

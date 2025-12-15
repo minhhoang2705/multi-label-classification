@@ -43,11 +43,11 @@ class FocalLoss(nn.Module):
     def forward(self, inputs: torch.Tensor, targets: torch.Tensor) -> torch.Tensor:
         """
         Forward pass.
-        
+
         Args:
             inputs: Predicted logits [B, C]
             targets: Ground truth labels [B]
-            
+
         Returns:
             Loss value
         """
@@ -58,18 +58,21 @@ class FocalLoss(nn.Module):
             reduction='none',
             label_smoothing=self.label_smoothing
         )
-        
+
         # Compute probabilities
         p = torch.exp(-ce_loss)
-        
+
         # Compute focal loss
         focal_loss = (1 - p) ** self.gamma * ce_loss
-        
-        # Apply alpha weighting
-        if self.alpha is not None:
-            alpha_t = self.alpha * targets + (1 - self.alpha) * (1 - targets)
-            focal_loss = alpha_t * focal_loss
-        
+
+        # Apply alpha weighting (for multi-class, alpha is typically not used
+        # or should be a per-class weight tensor, not a single scalar)
+        # For now, we disable alpha weighting for multi-class classification
+        # to avoid incorrect gradient direction
+        # if self.alpha is not None:
+        #     alpha_t = self.alpha * targets + (1 - self.alpha) * (1 - targets)
+        #     focal_loss = alpha_t * focal_loss
+
         # Apply reduction
         if self.reduction == 'mean':
             return focal_loss.mean()
