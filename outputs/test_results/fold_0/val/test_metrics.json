@@ -1,0 +1,33 @@
+{
+  "checkpoint": "outputs/checkpoints/fold_0/best_model.pt",
+  "model_name": "resnet50",
+  "split": "val",
+  "fold": 0,
+  "metrics": {
+    "accuracy": 0.5496406287023142,
+    "balanced_accuracy": 0.23102339124059035,
+    "precision_macro": 0.3271334422638197,
+    "recall_macro": 0.23102339124059035,
+    "f1_macro": 0.2579920324445541,
+    "precision_weighted": 0.5154120670400905,
+    "recall_weighted": 0.5496406287023142,
+    "f1_weighted": 0.5219218436581097,
+    "top_1_accuracy": 0.5496406287023142,
+    "top_3_accuracy": 0.7949609035621199,
+    "top_5_accuracy": 0.8673485506674038,
+    "roc_auc_micro": 0.9668315332570956,
+    "roc_auc_macro": NaN,
+    "average_precision_micro": 0.5307894423487324,
+    "average_precision_macro": 0.2255990834651285
+  },
+  "speed_metrics": {
+    "samples_tested": 1024,
+    "avg_time_per_sample_ms": 0.8753855240684061,
+    "std_time_per_sample_ms": 0.0008457122260279963,
+    "min_time_per_sample_ms": 0.8745039594941773,
+    "max_time_per_sample_ms": 0.877469647093676,
+    "median_time_per_sample_ms": 0.8751177701924462,
+    "throughput_samples_per_sec": 1142.353822978978,
+    "device": "cuda"
+  }
+}

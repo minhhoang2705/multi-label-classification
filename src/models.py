@@ -247,11 +247,12 @@ def save_checkpoint(
     epoch: int,
     metrics: dict,
     checkpoint_path: str,
-    scheduler: Optional[torch.optim.lr_scheduler._LRScheduler] = None
+    scheduler: Optional[torch.optim.lr_scheduler._LRScheduler] = None,
+    scaler: Optional[torch.cuda.amp.GradScaler] = None
 ):
     """
     Save model checkpoint.
-    
+
     Args:
         model: PyTorch model
         optimizer: Optimizer
@@ -259,6 +260,7 @@ def save_checkpoint(
         metrics: Dictionary of metrics
         checkpoint_path: Path to save checkpoint
         scheduler: Optional learning rate scheduler
+        scaler: Optional AMP gradient scaler
     """
     checkpoint = {
         'epoch': epoch,
@@ -266,10 +268,13 @@ def save_checkpoint(
         'optimizer_state_dict': optimizer.state_dict(),
         'metrics': metrics
     }
-    
+
     if scheduler is not None:
         checkpoint['scheduler_state_dict'] = scheduler.state_dict()
-    
+
+    if scaler is not None:
+        checkpoint['scaler_state_dict'] = scaler.state_dict()
+
     torch.save(checkpoint, checkpoint_path)
     print(f"Saved checkpoint to: {checkpoint_path}")
 

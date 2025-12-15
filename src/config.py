@@ -132,6 +132,9 @@ class TrainingConfig:
     num_folds: int = 5
     fold_to_train: Optional[int] = None  # None means train all folds
 
+    # Resume training
+    resume_checkpoint: Optional[str] = None  # Path to checkpoint to resume from
+
     # Early stopping
     early_stopping: bool = True
     early_stopping_patience: int = 10

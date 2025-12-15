@@ -75,19 +75,24 @@ class Trainer:
     def train_fold(self, fold_idx: int, train_loader: DataLoader, val_loader: DataLoader) -> Dict:
         """
         Train a single fold.
-        
+
         Args:
             fold_idx: Fold index
             train_loader: Training data loader
             val_loader: Validation data loader
-            
+
         Returns:
             Dictionary of best metrics
         """
         print(f"\n{'='*80}")
         print(f"TRAINING FOLD {fold_idx + 1}/{self.config.training.num_folds}")
         print(f"{'='*80}\n")
-        
+
+        # Clear GPU cache before creating model to avoid OOM errors
+        if torch.cuda.is_available():
+            torch.cuda.empty_cache()
+            print("✓ Cleared GPU cache")
+
         # Create model
         model = create_model(self.config.model).to(self.device)
         
@@ -130,7 +135,41 @@ class Trainer:
         
         # AMP scaler
         scaler = GradScaler() if self.config.training.use_amp else None
-        
+
+        # Resume from checkpoint if specified
+        start_epoch = 0
+        if self.config.training.resume_checkpoint is not None:
+            print(f"\nResuming from checkpoint: {self.config.training.resume_checkpoint}")
+            checkpoint = load_checkpoint(
+                model,
+                self.config.training.resume_checkpoint,
+                self.device,
+                strict=True
+            )
+
+            # Load optimizer state
+            if 'optimizer_state_dict' in checkpoint:
+                optimizer.load_state_dict(checkpoint['optimizer_state_dict'])
+                print("✓ Loaded optimizer state")
+
+            # Load scheduler state
+            if scheduler is not None and 'scheduler_state_dict' in checkpoint:
+                scheduler.load_state_dict(checkpoint['scheduler_state_dict'])
+                print("✓ Loaded scheduler state")
+
+            # Load AMP scaler state
+            if scaler is not None and 'scaler_state_dict' in checkpoint:
+                scaler.load_state_dict(checkpoint['scaler_state_dict'])
+                print("✓ Loaded AMP scaler state")
+
+            # Resume from next epoch
+            start_epoch = checkpoint.get('epoch', 0) + 1
+            print(f"✓ Resuming from epoch {start_epoch + 1}")
+
+            # Load best metrics if available
+            if 'metrics' in checkpoint:
+                print(f"✓ Previous metrics: {checkpoint['metrics']}")
+
         # Early stopping
         early_stopping = None
         if self.config.training.early_stopping:
@@ -139,18 +178,18 @@ class Trainer:
                 mode=self.config.training.early_stopping_mode,
                 verbose=True
             )
-        
+
         # Metric tracker
         metric_tracker = MetricTracker()
-        
+
         # Best metrics
         best_metrics = {
             'epoch': 0,
             self.config.training.early_stopping_metric: 0.0
         }
-        
+
         # Training loop
-        for epoch in range(self.config.training.num_epochs):
+        for epoch in range(start_epoch, self.config.training.num_epochs):
             print(f"\nEpoch {epoch + 1}/{self.config.training.num_epochs}")
             print("-" * 80)
             
@@ -215,11 +254,11 @@ class Trainer:
             
             if is_best or not self.config.logging.save_best_only:
                 checkpoint_path = checkpoint_dir / f"checkpoint_epoch_{epoch}.pt"
-                save_checkpoint(model, optimizer, epoch, all_metrics, str(checkpoint_path), scheduler)
-            
+                save_checkpoint(model, optimizer, epoch, all_metrics, str(checkpoint_path), scheduler, scaler)
+
             if is_best:
                 best_checkpoint_path = checkpoint_dir / "best_model.pt"
-                save_checkpoint(model, optimizer, epoch, all_metrics, str(best_checkpoint_path), scheduler)
+                save_checkpoint(model, optimizer, epoch, all_metrics, str(best_checkpoint_path), scheduler, scaler)
                 print(f"✓ Saved best model (epoch {epoch + 1})")
             
             # Early stopping

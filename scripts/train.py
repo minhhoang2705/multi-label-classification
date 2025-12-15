@@ -121,7 +121,9 @@ def parse_args():
                         help='Random seed')
     parser.add_argument('--fast_dev', action='store_true',
                         help='Use fast development config (2 epochs, 2 folds)')
-    
+    parser.add_argument('--resume', type=str, default=None,
+                        help='Path to checkpoint to resume training from')
+
     return parser.parse_args()
 
 
@@ -154,6 +156,7 @@ def update_config_from_args(config: Config, args: argparse.Namespace) -> Config:
     config.training.num_epochs = args.num_epochs
     config.training.num_folds = args.num_folds
     config.training.fold_to_train = args.fold
+    config.training.resume_checkpoint = args.resume
     config.training.use_amp = args.use_amp
     config.training.early_stopping = args.early_stopping
     config.training.early_stopping_patience = args.early_stopping_patience
