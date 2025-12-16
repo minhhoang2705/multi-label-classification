@@ -4,13 +4,26 @@ Image validation and preprocessing service for inference.
 
 import io
 import logging
-from typing import Tuple
+from typing import Tuple, TypedDict
 from PIL import Image, UnidentifiedImageError
 import torch
 import torchvision.transforms as T
 from fastapi import UploadFile, HTTPException
 
 logger = logging.getLogger(__name__)
+
+# Set PIL max image pixels to prevent decompression bomb attacks
+Image.MAX_IMAGE_PIXELS = 100_000_000  # 100 million pixels
+
+
+class ImageMetadata(TypedDict):
+    """Type-safe metadata for validated images."""
+    original_width: int
+    original_height: int
+    format: str
+    mode: str
+    file_size_bytes: int
+    filename: str
 
 
 class ImageService:
@@ -42,7 +55,7 @@ class ImageService:
 
     async def validate_and_preprocess(
         self, file: UploadFile
-    ) -> Tuple[torch.Tensor, dict]:
+    ) -> Tuple[torch.Tensor, ImageMetadata]:
         """
         Validate uploaded image and preprocess for inference.
 
@@ -64,28 +77,30 @@ class ImageService:
         # 3. Validate file size
         self._validate_file_size(content)
 
-        # 4. Validate image integrity and get PIL Image
-        img = self._validate_image(content)
+        # 4. Validate image structure first (before loading pixels)
+        img = self._validate_image_structure(content)
 
-        # 5. Validate dimensions
+        # 5. Validate dimensions BEFORE loading pixels (prevents memory exhaustion)
         self._validate_dimensions(img.size)
 
-        # 6. Collect metadata before transforms
-        metadata = {
+        # 6. Now safe to load pixel data
+        img = self._load_image_pixels(content)
+
+        # 7. Collect metadata before transforms
+        metadata: ImageMetadata = {
             "original_width": img.size[0],
             "original_height": img.size[1],
-            "format": img.format,
+            "format": img.format or "unknown",
             "mode": img.mode,
             "file_size_bytes": len(content),
-            "filename": file.filename
+            "filename": file.filename or "unknown"
         }
 
         logger.info(
-            f"Validated image: {file.filename}, "
-            f"size={img.size}, format={img.format}"
+            f"Validated image: size={img.size}, format={img.format}"
         )
 
-        # 7. Preprocess for model
+        # 8. Preprocess for model
         tensor = self._preprocess(img)
 
         return tensor, metadata
@@ -125,29 +140,27 @@ class ImageService:
                 detail=f"File too large: {size_mb:.2f}MB. Max: {max_mb:.0f}MB"
             )
 
-    def _validate_image(self, content: bytes) -> Image.Image:
+    def _validate_image_structure(self, content: bytes) -> Image.Image:
         """
-        Validate image integrity using PIL verify() + load() pattern.
-        This catches ~99% of corrupted images.
+        Validate image structure WITHOUT loading pixel data.
+        Returns image with metadata only (dimensions, format).
 
         Args:
             content: Image file bytes
 
         Returns:
-            PIL Image object
+            PIL Image object (structure only, pixels not loaded)
 
         Raises:
             HTTPException: For corrupted or invalid images
         """
         try:
-            # First pass: verify file structure
+            # Verify file structure only (doesn't load pixels)
             img = Image.open(io.BytesIO(content))
             img.verify()  # Validates format structure
 
-            # Second pass: actually load pixel data
-            # (verify() closes the file, must reopen)
+            # Reopen to get metadata (verify closes file)
             img = Image.open(io.BytesIO(content))
-            img.load()  # Forces pixel data loading
 
             return img
 
@@ -162,16 +175,42 @@ class ImageService:
                 status_code=400,
                 detail=f"Corrupted or invalid image: {str(e)}"
             )
+        except Exception as e:
+            logger.error(f"Unexpected error validating image: {e}", exc_info=True)
+            raise HTTPException(
+                status_code=400,
+                detail=f"Invalid image: {str(e)}"
+            )
+
+    def _load_image_pixels(self, content: bytes) -> Image.Image:
+        """
+        Load image pixel data after dimension validation.
+        Called only after dimensions are confirmed safe.
+
+        Args:
+            content: Image file bytes
+
+        Returns:
+            PIL Image with pixel data loaded
+
+        Raises:
+            HTTPException: For memory errors
+        """
+        try:
+            img = Image.open(io.BytesIO(content))
+            img.load()  # Forces pixel data loading
+            return img
+
         except MemoryError:
             raise HTTPException(
                 status_code=413,
                 detail="Image too large to process in memory"
             )
         except Exception as e:
-            logger.error(f"Unexpected error validating image: {e}", exc_info=True)
+            logger.error(f"Error loading image pixels: {e}", exc_info=True)
             raise HTTPException(
                 status_code=400,
-                detail=f"Invalid image: {str(e)}"
+                detail=f"Failed to load image: {str(e)}"
             )
 
     def _validate_dimensions(self, size: Tuple[int, int]):

@@ -22,12 +22,12 @@
   },
   "speed_metrics": {
     "samples_tested": 1024,
-    "avg_time_per_sample_ms": 0.8753855240684061,
-    "std_time_per_sample_ms": 0.0008457122260279963,
-    "min_time_per_sample_ms": 0.8745039594941773,
-    "max_time_per_sample_ms": 0.877469647093676,
-    "median_time_per_sample_ms": 0.8751177701924462,
-    "throughput_samples_per_sec": 1142.353822978978,
+    "avg_time_per_sample_ms": 0.8757092955420376,
+    "std_time_per_sample_ms": 0.0008106277182442709,
+    "min_time_per_sample_ms": 0.8748576328798663,
+    "max_time_per_sample_ms": 0.8776212816883344,
+    "median_time_per_sample_ms": 0.8755318776820786,
+    "throughput_samples_per_sec": 1141.931466401793,
     "device": "cuda"
   }
 }
