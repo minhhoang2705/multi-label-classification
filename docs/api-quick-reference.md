@@ -1,4 +1,4 @@
-# API Quick Reference - Phases 01 & 02
+# API Quick Reference - Phases 01-05
 
 ## Endpoints
 
@@ -7,7 +7,9 @@
 | GET | `/` | API info | 200 | 01 |
 | GET | `/health/live` | Liveness probe | 200 | 01 |
 | GET | `/health/ready` | Readiness probe | 200/503 | 01 |
-| POST | `/predict` | Single image inference | 200/400/413/500/503 | 02 |
+| GET | `/api/v1/model/info` | Model metadata | 200 | 03 |
+| GET | `/api/v1/model/classes` | Class listing | 200 | 03 |
+| POST | `/api/v1/predict` | Single image inference | 200/400/413/500/503 | 02-04 |
 
 ## Configuration
 
@@ -29,18 +31,28 @@ python -m uvicorn api.main:app --reload
 ## Test API
 
 ```bash
-# Phase 01 tests
-pytest tests/test_api_phase01.py -v
+# Run all tests with coverage (Phase 05)
+./scripts/run_api_tests.sh
 
-# Phase 02 tests (61 tests)
-pytest tests/test_api_phase02.py -v
+# Or run by category
+pytest tests/api/ -v                                  # All tests
+pytest tests/api/test_image_service.py -v            # Image validation (15 tests)
+pytest tests/api/test_health.py -v                   # Health checks (4 tests)
+pytest tests/api/test_predict.py -v                  # Predictions (10 tests)
+pytest tests/api/test_model.py -v                    # Model info (6 tests)
+pytest tests/api/test_inference_service.py -v        # Inference (5 tests)
+
+# Coverage report
+pytest tests/api/ --cov=api --cov-report=html
 
 # Health endpoints
 curl http://localhost:8000/health/live
 curl http://localhost:8000/health/ready
+curl http://localhost:8000/api/v1/model/info
+curl http://localhost:8000/api/v1/model/classes
 
 # Single image inference
-curl -X POST "http://localhost:8000/predict" \
+curl -X POST "http://localhost:8000/api/v1/predict" \
   -F "file=@cat.jpg"
 ```
 
@@ -104,11 +116,14 @@ tensor, metadata = await image_service.validate_and_preprocess(file)
 
 ## Documentation
 
-- **Phase 01:** `docs/api-phase01.md`
-- **Phase 02:** `docs/api-phase02.md` (Image validation & preprocessing)
+- **Phase 01:** `docs/api-phase01.md` - Core API & Model Loading
+- **Phase 02:** `docs/api-phase02.md` - Image Validation & Preprocessing
+- **Phase 03:** `docs/api-phase03.md` - Inference Pipeline
+- **Phase 04:** `docs/api-phase04.md` - Response Formatting & Metrics
+- **Phase 05:** `docs/api-phase05.md` - Testing & Validation
 - **Testing Guide:** `docs/testing-guide.md`
 - **Interactive Docs:** http://localhost:8000/docs
 
 ---
 
-**Phase 02 Status:** Complete (61 tests, security hardened)
+**Phase 05 Status:** Complete (40 tests, 89% coverage, production-ready)

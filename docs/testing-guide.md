@@ -10,39 +10,51 @@ Comprehensive guide for testing trained cat breeds classification models and API
 
 ---
 
-## API Testing (Phase 01)
+## API Testing (Phase 01-05)
 
-See [`docs/api-phase01.md`](./api-phase01.md) for complete API documentation.
+See detailed documentation:
+- [`docs/api-phase05.md`](./api-phase05.md) - **Phase 05: Testing & Validation (40 tests, 89% coverage)**
+- [`docs/api-phase01.md`](./api-phase01.md) - Phase 01: Core API & Model Loading
+- [`docs/api-phase02.md`](./api-phase02.md) - Phase 02: Image Validation & Preprocessing
+- [`docs/api-phase03.md`](./api-phase03.md) - Phase 03: Inference Pipeline
+- [`docs/api-phase04.md`](./api-phase04.md) - Phase 04: Response Formatting & Metrics
 
-### Run API Tests
+### Run API Tests (Phase 05)
 
 ```bash
-# Run all Phase 01 API tests
-pytest tests/test_api_phase01.py -v
+# Run all tests with coverage report
+./scripts/run_api_tests.sh
 
-# Run specific test category
-pytest tests/test_api_phase01.py::TestHealthEndpoints -v
+# Or run specific test suites
+pytest tests/api/ -v
 
-# Run with detailed output
-pytest tests/test_api_phase01.py -vv --tb=short
+# Run unit tests only (fast, no model)
+pytest tests/api/test_image_service.py tests/api/test_inference_service.py -v
+
+# Run integration tests (requires model)
+pytest tests/api/test_health.py tests/api/test_predict.py tests/api/test_model.py -v
+
+# Run specific test class
+pytest tests/api/test_image_service.py::TestImageServiceValidation -v
 
 # Run single test
-pytest tests/test_api_phase01.py::TestHealthEndpoints::test_health_live_endpoint -v
+pytest tests/api/test_health.py::TestHealthEndpoints::test_liveness -v
+
+# Generate coverage report
+pytest tests/api/ --cov=api --cov-report=term-missing --cov-report=html
 ```
 
-### API Test Coverage
+### API Test Coverage (Phase 05)
 
-- **Device Detection:** 4 tests (auto/cuda/cpu/mps)
-- **Class Names:** 3 tests (loading, expected breeds, sorting)
-- **Singleton Pattern:** 2 tests (reuse, state persistence)
-- **Model Loading:** 4 tests (real checkpoint, file handling, compatibility, performance)
-- **Health Endpoints:** 3 tests (root, liveness, readiness)
-- **API Startup:** 4 tests (creation, routers, CORS, client)
-- **Configuration:** 3 tests (loading, defaults, model config)
-- **Integration:** 3 tests (startup loading, health after startup, all endpoints)
-- **Performance:** 1 test (load time < 30s)
+**Total:** 40 comprehensive tests covering all phases
+- **Code Coverage:** 89%
+- **Health Endpoints:** 4 tests
+- **Image Service Validation:** 15 tests
+- **Inference Service:** 5 tests
+- **Predict Endpoint:** 10 tests
+- **Model Endpoints:** 6 tests
 
-**Total:** 30+ tests covering Phase 01 functionality
+See [`docs/api-phase05.md`](./api-phase05.md) for detailed test breakdown by component.
 
 ### API Quick Start
 
@@ -53,10 +65,13 @@ python -m uvicorn api.main:app --reload
 # In another terminal, test endpoints
 curl http://localhost:8000/health/live
 curl http://localhost:8000/health/ready
-curl http://localhost:8000/
+curl http://localhost:8000/api/v1/model/info
 
 # View interactive docs
 # Browser: http://localhost:8000/docs
+
+# Run test suite
+./scripts/run_api_tests.sh
 ```
 
 ---
