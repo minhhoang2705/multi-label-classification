@@ -7,9 +7,9 @@
 | GET | `/` | API info | 200 | 01 |
 | GET | `/health/live` | Liveness probe | 200 | 01 |
 | GET | `/health/ready` | Readiness probe | 200/503 | 01 |
-| GET | `/api/v1/model/info` | Model metadata | 200 | 03 |
-| GET | `/api/v1/model/classes` | Class listing | 200 | 03 |
-| POST | `/api/v1/predict` | Single image inference | 200/400/413/500/503 | 02-04 |
+| GET | `/api/v1/model/info` | Model metadata | 200 | 01 |
+| GET | `/api/v1/model/classes` | Class listing | 200 | 01 |
+| POST | `/api/v1/predict` | Single image inference | 200/400/413/422/503 | 03 |
 
 ## Configuration
 
@@ -67,6 +67,9 @@ curl -X POST "http://localhost:8000/api/v1/predict" \
 | **ImageService** | `api/services/image_service.py` | Validation & preprocessing | 02 |
 | **Dependencies** | `api/dependencies.py` | DI factories | 02 |
 | **Exceptions** | `api/exceptions.py` | Custom HTTP exceptions | 02 |
+| **Models** | `api/models.py` | Pydantic schemas | 03 |
+| **InferenceService** | `api/services/inference_service.py` | Top-K prediction extraction | 03 |
+| **Predict Router** | `api/routers/predict.py` | Prediction endpoint | 03 |
 
 ## ModelManager
 
@@ -116,11 +119,11 @@ tensor, metadata = await image_service.validate_and_preprocess(file)
 
 ## Documentation
 
-- **Phase 01:** `docs/api-phase01.md` - Core API & Model Loading
-- **Phase 02:** `docs/api-phase02.md` - Image Validation & Preprocessing
-- **Phase 03:** `docs/api-phase03.md` - Inference Pipeline
+- **Phase 01:** `docs/api-phase01.md` - Core API & Model Loading ✓
+- **Phase 02:** `docs/api-phase02.md` - Image Validation & Preprocessing ✓
+- **Phase 03:** `docs/api-phase03.md` - Inference Endpoint Implementation ✓
 - **Phase 04:** `docs/api-phase04.md` - Response Formatting & Metrics
-- **Phase 05:** `docs/api-phase05.md` - Testing & Validation
+- **Phase 05:** `docs/api-phase05.md` - Testing & Validation ✓
 - **Testing Guide:** `docs/testing-guide.md`
 - **Interactive Docs:** http://localhost:8000/docs
 

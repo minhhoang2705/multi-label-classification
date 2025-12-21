@@ -11,7 +11,7 @@ from contextlib import asynccontextmanager
 
 from .config import settings
 from .services.model_service import ModelManager
-from .routers import health
+from .routers import health, predict
 
 # Configure logging
 logging.basicConfig(
@@ -99,6 +99,7 @@ async def general_exception_handler(request: Request, exc: Exception):
 
 # Include routers
 app.include_router(health.router, tags=["Health"])
+app.include_router(predict.router, prefix="/api/v1", tags=["Prediction"])
 
 
 @app.get("/")
