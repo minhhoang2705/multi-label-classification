@@ -50,3 +50,45 @@ class ErrorResponse(BaseModel):
     """Error response schema."""
     detail: str
     errors: Optional[List[dict]] = None
+
+
+class PerformanceMetrics(BaseModel):
+    """Model performance metrics from validation set."""
+    accuracy: float = Field(..., description="Overall accuracy")
+    balanced_accuracy: float = Field(..., description="Balanced accuracy")
+    f1_macro: float = Field(..., description="Macro-averaged F1 score")
+    f1_weighted: float = Field(..., description="Weighted F1 score")
+    top_3_accuracy: float = Field(..., description="Top-3 accuracy")
+    top_5_accuracy: float = Field(..., description="Top-5 accuracy")
+
+
+class SpeedMetrics(BaseModel):
+    """Model inference speed metrics."""
+    avg_time_per_sample_ms: float
+    throughput_samples_per_sec: float
+    device: str
+
+
+class ModelInfoResponse(BaseModel):
+    """Model information and performance metrics."""
+    model_name: str
+    num_classes: int
+    image_size: int
+    checkpoint_path: str
+    device: str
+    is_loaded: bool
+    performance_metrics: Optional[PerformanceMetrics] = None
+    speed_metrics: Optional[SpeedMetrics] = None
+    class_names: List[str]
+
+
+class ClassInfo(BaseModel):
+    """Single class information."""
+    id: int
+    name: str
+
+
+class ClassListResponse(BaseModel):
+    """List of supported classes."""
+    num_classes: int
+    classes: List[ClassInfo]

@@ -11,7 +11,8 @@ from contextlib import asynccontextmanager
 
 from .config import settings
 from .services.model_service import ModelManager
-from .routers import health, predict
+from .routers import health, predict, model
+from .middleware import VersionHeaderMiddleware
 
 # Configure logging
 logging.basicConfig(
@@ -57,13 +58,38 @@ async def lifespan(app: FastAPI):
 
 # Create FastAPI application
 app = FastAPI(
-    title=settings.api_title,
-    version=settings.api_version,
-    description=settings.api_description,
+    title="Cat Breeds Classification API",
+    description="""
+## Cat Breed Image Classification API
+
+Predict cat breeds from uploaded images using deep learning.
+
+### Features
+- **67 cat breeds** supported
+- **Top-5 predictions** with confidence scores
+- **Fast inference** (~0.9ms/image on GPU)
+- **Image validation** (JPEG, PNG, WebP)
+
+### Model Information
+- Architecture: ResNet50 / EfficientNet (TIMM)
+- Input size: 224x224
+- Normalization: ImageNet statistics
+
+### Usage
+1. Upload an image via POST /api/v1/predict
+2. Receive predicted breed with confidence scores
+""",
+    version="1.0.0",
+    docs_url="/docs",
+    redoc_url="/redoc",
     lifespan=lifespan
 )
 
-# Add CORS middleware with restricted origins
+# Add middlewares
+# Version headers (add first to be outermost)
+app.add_middleware(VersionHeaderMiddleware)
+
+# CORS middleware with restricted origins
 app.add_middleware(
     CORSMiddleware,
     allow_origins=settings.cors_origins,
@@ -100,6 +126,7 @@ async def general_exception_handler(request: Request, exc: Exception):
 # Include routers
 app.include_router(health.router, tags=["Health"])
 app.include_router(predict.router, prefix="/api/v1", tags=["Prediction"])
+app.include_router(model.router, prefix="/api/v1", tags=["Model"])
 
 
 @app.get("/")
