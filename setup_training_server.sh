@@ -46,6 +46,9 @@ NC='\033[0m' # No Color
 # Timing
 START_TIME=$(date +%s)
 
+# Ensure state directory exists before any logging
+mkdir -p "$STATE_DIR"
+
 # ============================================================================
 # CLI Flags
 # ============================================================================
