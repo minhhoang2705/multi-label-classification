@@ -7,100 +7,100 @@
     },
     {
       "rank": 2,
-      "class": "Burmilla",
-      "f1_score": 0.0
-    },
-    {
-      "rank": 3,
       "class": "Canadian Hairless",
       "f1_score": 0.0
     },
     {
-      "rank": 4,
-      "class": "Chartreux",
-      "f1_score": 0.0
-    },
-    {
-      "rank": 5,
+      "rank": 3,
       "class": "Chausie",
       "f1_score": 0.0
     },
     {
-      "rank": 6,
+      "rank": 4,
       "class": "Chinchilla",
       "f1_score": 0.0
     },
     {
-      "rank": 7,
+      "rank": 5,
       "class": "Cymric",
       "f1_score": 0.0
     },
     {
-      "rank": 8,
-      "class": "Devon Rex",
+      "rank": 6,
+      "class": "LaPerm",
       "f1_score": 0.0
+    },
+    {
+      "rank": 7,
+      "class": "York Chocolate",
+      "f1_score": 0.0
+    },
+    {
+      "rank": 8,
+      "class": "Oriental Long Hair",
+      "f1_score": 0.25
     },
     {
       "rank": 9,
-      "class": "Japanese Bobtail",
-      "f1_score": 0.0
+      "class": "Javanese",
+      "f1_score": 0.3333333333333333
     },
     {
       "rank": 10,
-      "class": "Korat",
-      "f1_score": 0.0
+      "class": "Silver",
+      "f1_score": 0.4166666666666667
     }
   ],
   "best_performing": [
     {
       "rank": 1,
       "class": "Sphynx - Hairless Cat",
-      "f1_score": 0.8461538461538461
+      "f1_score": 0.9879518072289156
     },
     {
       "rank": 2,
-      "class": "Persian",
-      "f1_score": 0.7940261356565028
+      "class": "Cornish Rex",
+      "f1_score": 0.9855072463768116
     },
     {
       "rank": 3,
-      "class": "Domestic Short Hair",
-      "f1_score": 0.7056243016181766
+      "class": "Persian",
+      "f1_score": 0.9649122807017544
     },
     {
       "rank": 4,
-      "class": "Bengal",
-      "f1_score": 0.6761800219538968
+      "class": "Scottish Fold",
+      "f1_score": 0.948051948051948
     },
     {
       "rank": 5,
-      "class": "Cornish Rex",
-      "f1_score": 0.65625
+      "class": "Bengal",
+      "f1_score": 0.934409687184662
     },
     {
       "rank": 6,
-      "class": "Siamese",
-      "f1_score": 0.6360759493670886
+      "class": "Selkirk Rex",
+      "f1_score": 0.9285714285714286
     },
     {
       "rank": 7,
-      "class": "Snowshoe",
-      "f1_score": 0.5533333333333333
+      "class": "Russian Blue",
+      "f1_score": 0.9228687415426252
     },
     {
       "rank": 8,
-      "class": "Tortoiseshell",
-      "f1_score": 0.5464753587024329
+      "class": "Domestic Short Hair",
+      "f1_score": 0.9227816461346188
     },
     {
       "rank": 9,
-      "class": "Ragdoll",
-      "f1_score": 0.5377358490566038
+      "class": "Siamese",
+      "f1_score": 0.9095519864750634
     },
     {
       "rank": 10,
-      "class": "Abyssinian",
-      "f1_score": 0.5116279069767442
+      "class": "Devon Rex",
+      "f1_score": 0.9090909090909091
     }
   ]
 }

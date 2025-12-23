@@ -15,7 +15,7 @@ fi
 # Default parameters
 FOLD=${1:-0}
 SPLIT=${2:-val}
-MODEL_NAME=${3:-resnet50}
+MODEL_NAME=${3:-convnext_base}
 
 # Find best checkpoint for fold
 BEST_CHECKPOINT="outputs/checkpoints/fold_${FOLD}/best_model.pt"
@@ -46,7 +46,7 @@ python scripts/test.py \
     --model_name "$MODEL_NAME" \
     --split "$SPLIT" \
     --fold "$FOLD" \
-    --batch_size 64 \
+    --batch_size 128 \
     --num_workers 4 \
     --save_confusion_matrix \
     --save_per_class_metrics \
