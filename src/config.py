@@ -163,7 +163,7 @@ class LoggingConfig:
 
     # Checkpointing
     checkpoint_dir: str = "outputs/checkpoints"
-    save_best_only: bool = False
+    save_best_only: bool = True
     save_last: bool = True
 
     # Logging frequency
