@@ -1,0 +1,106 @@
+{
+  "worst_performing": [
+    {
+      "rank": 1,
+      "class": "American Wirehair",
+      "f1_score": 0.0
+    },
+    {
+      "rank": 2,
+      "class": "Burmilla",
+      "f1_score": 0.0
+    },
+    {
+      "rank": 3,
+      "class": "Canadian Hairless",
+      "f1_score": 0.0
+    },
+    {
+      "rank": 4,
+      "class": "Chausie",
+      "f1_score": 0.0
+    },
+    {
+      "rank": 5,
+      "class": "Chinchilla",
+      "f1_score": 0.0
+    },
+    {
+      "rank": 6,
+      "class": "Cymric",
+      "f1_score": 0.0
+    },
+    {
+      "rank": 7,
+      "class": "Javanese",
+      "f1_score": 0.0
+    },
+    {
+      "rank": 8,
+      "class": "LaPerm",
+      "f1_score": 0.0
+    },
+    {
+      "rank": 9,
+      "class": "Oriental Long Hair",
+      "f1_score": 0.0
+    },
+    {
+      "rank": 10,
+      "class": "Silver",
+      "f1_score": 0.0
+    }
+  ],
+  "best_performing": [
+    {
+      "rank": 1,
+      "class": "Sphynx - Hairless Cat",
+      "f1_score": 0.8648648648648649
+    },
+    {
+      "rank": 2,
+      "class": "Persian",
+      "f1_score": 0.828641370869033
+    },
+    {
+      "rank": 3,
+      "class": "Domestic Short Hair",
+      "f1_score": 0.7301749893299189
+    },
+    {
+      "rank": 4,
+      "class": "Cornish Rex",
+      "f1_score": 0.7096774193548387
+    },
+    {
+      "rank": 5,
+      "class": "Bengal",
+      "f1_score": 0.6988210075026795
+    },
+    {
+      "rank": 6,
+      "class": "Siamese",
+      "f1_score": 0.6528332003192339
+    },
+    {
+      "rank": 7,
+      "class": "Scottish Fold",
+      "f1_score": 0.6259541984732825
+    },
+    {
+      "rank": 8,
+      "class": "Abyssinian",
+      "f1_score": 0.6222222222222222
+    },
+    {
+      "rank": 9,
+      "class": "Ragdoll",
+      "f1_score": 0.620821394460363
+    },
+    {
+      "rank": 10,
+      "class": "Tortoiseshell",
+      "f1_score": 0.609568812758417
+    }
+  ]
+}

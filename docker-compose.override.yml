@@ -1,0 +1,27 @@
+version: '3.8'
+
+services:
+  cat-breeds-api:
+    # Override build target (if multi-target Dockerfile)
+    build:
+      context: .
+      dockerfile: Dockerfile
+      # target: development  # Uncomment if Dockerfile has dev stage
+
+    # Bind mount code for hot-reload
+    volumes:
+      - ./api:/app/api:ro  # Read-only code mount
+      - ./src:/app/src:ro  # Read-only source mount
+
+    # Override CMD for hot-reload
+    command: ["uvicorn", "api.main:app", "--host", "0.0.0.0", "--port", "8000", "--reload"]
+
+    # Development environment variables
+    environment:
+      - API_DEVICE=cuda  # Force CUDA in dev
+      - LOG_LEVEL=DEBUG
+
+    # Expose additional ports (debugger, monitoring)
+    ports:
+      - "127.0.0.1:8000:8000"
+      - "127.0.0.1:5678:5678"  # Python debugger (debugpy)

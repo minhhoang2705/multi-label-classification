@@ -1,0 +1,74 @@
+version: '3.8'
+
+services:
+  cat-breeds-api:
+    image: cat-breeds-api:latest
+    container_name: cat-breeds-api
+    build:
+      context: .
+      dockerfile: Dockerfile
+
+    # GPU support (requires NVIDIA Container Toolkit)
+    deploy:
+      resources:
+        limits:
+          cpus: '4.0'
+          memory: 8G
+        reservations:
+          cpus: '2.0'
+          memory: 4G
+          devices:
+            - driver: nvidia
+              device_ids: ['0']  # Use first GPU
+              capabilities: [gpu]
+
+    # Port mapping (localhost only)
+    ports:
+      - "127.0.0.1:8000:8000"
+
+    # Environment variables (from .env file)
+    environment:
+      - API_CHECKPOINT_PATH=${API_CHECKPOINT_PATH:-outputs/checkpoints/fold_0/best_model.pt}
+      - API_MODEL_NAME=${API_MODEL_NAME:-resnet50}
+      - API_NUM_CLASSES=${API_NUM_CLASSES:-67}
+      - API_IMAGE_SIZE=${API_IMAGE_SIZE:-224}
+      - API_DEVICE=${API_DEVICE:-auto}
+      - API_HOST=0.0.0.0
+      - API_PORT=8000
+
+    # Volume mounts
+    volumes:
+      - models:/app/outputs/checkpoints:ro  # Read-only model weights
+      - logs:/app/logs
+      - cache:/home/appuser/.cache
+
+    # Health check (60s grace period for model loading)
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health/live"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 60s
+
+    # Restart policy
+    restart: unless-stopped
+
+    # Network
+    networks:
+      - ml-network
+
+volumes:
+  models:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: ${PWD}/outputs/checkpoints  # Bind to host model directory
+  logs:
+    name: cat_breeds_logs
+  cache:
+    name: cat_breeds_cache_v1
+
+networks:
+  ml-network:
+    driver: bridge

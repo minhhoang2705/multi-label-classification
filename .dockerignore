@@ -1,0 +1,74 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+.venv/
+venv/
+env/
+
+# Data and outputs
+data/
+outputs/
+checkpoints/
+*.pt
+*.pth
+*.pkl
+*.h5
+
+# Notebooks and EDA
+*.ipynb
+.ipynb_checkpoints/
+
+# MLflow
+mlruns/
+mlartifacts/
+
+# Git
+.git/
+.gitignore
+.gitattributes
+
+# Docker
+Dockerfile*
+docker-compose*.yml
+.dockerignore
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.claude/
+
+# Logs
+*.log
+logs/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Documentation
+*.md
+docs/
+
+# Tests
+tests/
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Scripts (development only)
+scripts/download_dataset.sh
+scripts/validate_env.py
+setup_training_server.sh
+resume_training.sh
+start_mlflow.sh
+stop_mlflow.sh
+test_model.sh
+
+# Plans
+plans/

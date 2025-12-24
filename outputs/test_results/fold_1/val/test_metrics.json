@@ -1,0 +1,33 @@
+{
+  "checkpoint": "outputs/checkpoints/fold_1/best_model.pt",
+  "model_name": "convnext_base",
+  "split": "val",
+  "fold": 1,
+  "metrics": {
+    "accuracy": 0.5808782876550036,
+    "balanced_accuracy": 0.27893452145724174,
+    "precision_macro": 0.40030056356249416,
+    "recall_macro": 0.27893452145724174,
+    "f1_macro": 0.3123112899955297,
+    "precision_weighted": 0.5552274595535187,
+    "recall_weighted": 0.5808782876550036,
+    "f1_weighted": 0.558961375179237,
+    "top_1_accuracy": 0.5808782876550036,
+    "top_3_accuracy": 0.8181028354790301,
+    "top_5_accuracy": 0.8880025274464892,
+    "roc_auc_micro": 0.96384511245118,
+    "roc_auc_macro": 0.8793167343318455,
+    "average_precision_micro": 0.5836651391711186,
+    "average_precision_macro": 0.29264448993423026
+  },
+  "speed_metrics": {
+    "samples_tested": 1024,
+    "avg_time_per_sample_ms": 3.0650794142275117,
+    "std_time_per_sample_ms": 0.02726369722159178,
+    "min_time_per_sample_ms": 2.999093325342983,
+    "max_time_per_sample_ms": 3.091663180384785,
+    "median_time_per_sample_ms": 3.07518063345924,
+    "throughput_samples_per_sec": 326.2558207654234,
+    "device": "cuda"
+  }
+}

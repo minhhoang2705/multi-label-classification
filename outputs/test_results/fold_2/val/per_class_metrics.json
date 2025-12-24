@@ -1,0 +1,404 @@
+{
+  "Abyssinian": {
+    "precision": 1.0,
+    "recall": 0.9803921568627451,
+    "f1": 0.9900990099009901,
+    "support": 51
+  },
+  "American Bobtail": {
+    "precision": 0.9949494949494949,
+    "recall": 0.9949494949494949,
+    "f1": 0.9949494949494949,
+    "support": 198
+  },
+  "American Curl": {
+    "precision": 1.0,
+    "recall": 0.9666666666666667,
+    "f1": 0.9830508474576272,
+    "support": 30
+  },
+  "American Shorthair": {
+    "precision": 0.9952785646836638,
+    "recall": 0.9952785646836638,
+    "f1": 0.9952785646836638,
+    "support": 1059
+  },
+  "American Wirehair": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0,
+    "support": 4
+  },
+  "Applehead Siamese": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0,
+    "support": 27
+  },
+  "Balinese": {
+    "precision": 0.9807692307692307,
+    "recall": 1.0,
+    "f1": 0.9902912621359223,
+    "support": 51
+  },
+  "Bengal": {
+    "precision": 0.9959595959595959,
+    "recall": 0.9959595959595959,
+    "f1": 0.9959595959595959,
+    "support": 495
+  },
+  "Birman": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0,
+    "support": 45
+  },
+  "Bombay": {
+    "precision": 1.0,
+    "recall": 0.9945504087193461,
+    "f1": 0.9972677595628415,
+    "support": 367
+  },
+  "British Shorthair": {
+    "precision": 1.0,
+    "recall": 0.9912280701754386,
+    "f1": 0.9955947136563876,
+    "support": 114
+  },
+  "Burmese": {
+    "precision": 0.9857142857142858,
+    "recall": 1.0,
+    "f1": 0.9928057553956835,
+    "support": 69
+  },
+  "Burmilla": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0,
+    "support": 1
+  },
+  "Calico": {
+    "precision": 0.9857142857142858,
+    "recall": 0.9942363112391931,
+    "f1": 0.9899569583931134,
+    "support": 694
+  },
+  "Canadian Hairless": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0,
+    "support": 1
+  },
+  "Chartreux": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0,
+    "support": 16
+  },
+  "Chausie": {
+    "precision": 0.8333333333333334,
+    "recall": 1.0,
+    "f1": 0.9090909090909091,
+    "support": 5
+  },
+  "Chinchilla": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0,
+    "support": 1
+  },
+  "Cornish Rex": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0,
+    "support": 34
+  },
+  "Cymric": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0,
+    "support": 3
+  },
+  "Devon Rex": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0,
+    "support": 24
+  },
+  "Dilute Calico": {
+    "precision": 0.9906832298136646,
+    "recall": 0.9876160990712074,
+    "f1": 0.9891472868217054,
+    "support": 646
+  },
+  "Dilute Tortoiseshell": {
+    "precision": 0.9936406995230525,
+    "recall": 0.9904912836767037,
+    "f1": 0.9920634920634921,
+    "support": 631
+  },
+  "Domestic Long Hair": {
+    "precision": 0.9943820224719101,
+    "recall": 0.9844271412680756,
+    "f1": 0.9893795416433762,
+    "support": 899
+  },
+  "Domestic Medium Hair": {
+    "precision": 0.9881061299176578,
+    "recall": 0.9845031905195989,
+    "f1": 0.9863013698630136,
+    "support": 1097
+  },
+  "Domestic Short Hair": {
+    "precision": 0.9954785229841748,
+    "recall": 0.9965110796793966,
+    "f1": 0.9959945337166015,
+    "support": 10605
+  },
+  "Egyptian Mau": {
+    "precision": 1.0,
+    "recall": 0.9836065573770492,
+    "f1": 0.9917355371900827,
+    "support": 61
+  },
+  "Exotic Shorthair": {
+    "precision": 1.0,
+    "recall": 0.9787234042553191,
+    "f1": 0.989247311827957,
+    "support": 94
+  },
+  "Extra-Toes Cat - Hemingway Polydactyl": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0,
+    "support": 237
+  },
+  "Havana": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0,
+    "support": 37
+  },
+  "Himalayan": {
+    "precision": 0.9961538461538462,
+    "recall": 0.9961538461538462,
+    "f1": 0.9961538461538462,
+    "support": 260
+  },
+  "Japanese Bobtail": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0,
+    "support": 26
+  },
+  "Javanese": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0,
+    "support": 5
+  },
+  "Korat": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0,
+    "support": 13
+  },
+  "LaPerm": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0,
+    "support": 4
+  },
+  "Maine Coon": {
+    "precision": 0.9929824561403509,
+    "recall": 1.0,
+    "f1": 0.9964788732394366,
+    "support": 283
+  },
+  "Manx": {
+    "precision": 0.9975490196078431,
+    "recall": 0.9878640776699029,
+    "f1": 0.9926829268292683,
+    "support": 412
+  },
+  "Munchkin": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0,
+    "support": 36
+  },
+  "Nebelung": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0,
+    "support": 30
+  },
+  "Norwegian Forest Cat": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0,
+    "support": 116
+  },
+  "Ocicat": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0,
+    "support": 23
+  },
+  "Oriental Long Hair": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0,
+    "support": 8
+  },
+  "Oriental Short Hair": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0,
+    "support": 98
+  },
+  "Oriental Tabby": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0,
+    "support": 20
+  },
+  "Persian": {
+    "precision": 0.9975155279503105,
+    "recall": 0.9987562189054726,
+    "f1": 0.9981354878806712,
+    "support": 804
+  },
+  "Pixiebob": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0,
+    "support": 22
+  },
+  "Ragamuffin": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0,
+    "support": 27
+  },
+  "Ragdoll": {
+    "precision": 1.0,
+    "recall": 0.9962546816479401,
+    "f1": 0.99812382739212,
+    "support": 534
+  },
+  "Russian Blue": {
+    "precision": 0.9946808510638298,
+    "recall": 1.0,
+    "f1": 0.9973333333333333,
+    "support": 374
+  },
+  "Scottish Fold": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0,
+    "support": 76
+  },
+  "Selkirk Rex": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0,
+    "support": 15
+  },
+  "Siamese": {
+    "precision": 0.9947916666666666,
+    "recall": 0.9913494809688581,
+    "f1": 0.9930675909878682,
+    "support": 578
+  },
+  "Siberian": {
+    "precision": 1.0,
+    "recall": 0.9459459459459459,
+    "f1": 0.9722222222222222,
+    "support": 37
+  },
+  "Silver": {
+    "precision": 1.0,
+    "recall": 0.9473684210526315,
+    "f1": 0.972972972972973,
+    "support": 19
+  },
+  "Singapura": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0,
+    "support": 5
+  },
+  "Snowshoe": {
+    "precision": 0.9938837920489296,
+    "recall": 1.0,
+    "f1": 0.9969325153374233,
+    "support": 325
+  },
+  "Somali": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0,
+    "support": 7
+  },
+  "Sphynx - Hairless Cat": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0,
+    "support": 42
+  },
+  "Tabby": {
+    "precision": 0.9834983498349835,
+    "recall": 0.9900332225913622,
+    "f1": 0.9867549668874173,
+    "support": 602
+  },
+  "Tiger": {
+    "precision": 0.9912087912087912,
+    "recall": 1.0,
+    "f1": 0.9955849889624724,
+    "support": 451
+  },
+  "Tonkinese": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0,
+    "support": 52
+  },
+  "Torbie": {
+    "precision": 0.9852941176470589,
+    "recall": 0.9867452135493373,
+    "f1": 0.986019131714496,
+    "support": 679
+  },
+  "Tortoiseshell": {
+    "precision": 0.9899749373433584,
+    "recall": 0.9962168978562421,
+    "f1": 0.9930861093651792,
+    "support": 793
+  },
+  "Turkish Angora": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0,
+    "support": 150
+  },
+  "Turkish Van": {
+    "precision": 1.0,
+    "recall": 0.9815950920245399,
+    "f1": 0.9907120743034056,
+    "support": 163
+  },
+  "Tuxedo": {
+    "precision": 0.9905362776025236,
+    "recall": 0.9874213836477987,
+    "f1": 0.988976377952756,
+    "support": 636
+  },
+  "York Chocolate": {
+    "precision": 0.0,
+    "recall": 0.0,
+    "f1": 0.0,
+    "support": 0
+  }
+}

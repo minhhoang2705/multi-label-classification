@@ -32,7 +32,7 @@ ENV/
 env/
 
 # ML/Training outputs
-outputs/
+outputs/checkpoints/
 mlruns/
 mlflow_ui.log
 *.pt
@@ -67,3 +67,9 @@ Thumbs.db
 *.tmp
 *.bak
 *.orig
+
+# Docker environment variables
+.env
+
+# Docker volumes
+docker-volumes/

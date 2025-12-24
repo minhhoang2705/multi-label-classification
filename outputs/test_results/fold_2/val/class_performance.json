@@ -1,0 +1,106 @@
+{
+  "worst_performing": [
+    {
+      "rank": 1,
+      "class": "York Chocolate",
+      "f1_score": 0.0
+    },
+    {
+      "rank": 2,
+      "class": "Chausie",
+      "f1_score": 0.9090909090909091
+    },
+    {
+      "rank": 3,
+      "class": "Siberian",
+      "f1_score": 0.9722222222222222
+    },
+    {
+      "rank": 4,
+      "class": "Silver",
+      "f1_score": 0.972972972972973
+    },
+    {
+      "rank": 5,
+      "class": "American Curl",
+      "f1_score": 0.9830508474576272
+    },
+    {
+      "rank": 6,
+      "class": "Torbie",
+      "f1_score": 0.986019131714496
+    },
+    {
+      "rank": 7,
+      "class": "Domestic Medium Hair",
+      "f1_score": 0.9863013698630136
+    },
+    {
+      "rank": 8,
+      "class": "Tabby",
+      "f1_score": 0.9867549668874173
+    },
+    {
+      "rank": 9,
+      "class": "Tuxedo",
+      "f1_score": 0.988976377952756
+    },
+    {
+      "rank": 10,
+      "class": "Dilute Calico",
+      "f1_score": 0.9891472868217054
+    }
+  ],
+  "best_performing": [
+    {
+      "rank": 1,
+      "class": "American Wirehair",
+      "f1_score": 1.0
+    },
+    {
+      "rank": 2,
+      "class": "Applehead Siamese",
+      "f1_score": 1.0
+    },
+    {
+      "rank": 3,
+      "class": "Birman",
+      "f1_score": 1.0
+    },
+    {
+      "rank": 4,
+      "class": "Burmilla",
+      "f1_score": 1.0
+    },
+    {
+      "rank": 5,
+      "class": "Canadian Hairless",
+      "f1_score": 1.0
+    },
+    {
+      "rank": 6,
+      "class": "Chartreux",
+      "f1_score": 1.0
+    },
+    {
+      "rank": 7,
+      "class": "Chinchilla",
+      "f1_score": 1.0
+    },
+    {
+      "rank": 8,
+      "class": "Cornish Rex",
+      "f1_score": 1.0
+    },
+    {
+      "rank": 9,
+      "class": "Cymric",
+      "f1_score": 1.0
+    },
+    {
+      "rank": 10,
+      "class": "Devon Rex",
+      "f1_score": 1.0
+    }
+  ]
+}
