@@ -41,3 +41,7 @@ uvicorn[standard]>=0.32.0
 python-multipart>=0.0.17
 pydantic-settings>=2.0.0
 
+# VLM (Vision Language Model) for breed verification
+# Z.ai SDK for GLM-4.6V vision model integration
+zai-sdk>=0.0.4
+

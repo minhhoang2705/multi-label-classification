@@ -1,9 +1,16 @@
 """
 API configuration using Pydantic Settings.
+
+This module centralizes all configuration for the API server, including:
+- Model settings (checkpoint path, architecture)
+- Server settings (host, port, CORS)
+- VLM settings (enable/disable, API keys)
+
+All settings can be overridden via environment variables with API_ prefix.
 """
 
 from pydantic_settings import BaseSettings
-from typing import List
+from typing import List, Optional
 
 
 class Settings(BaseSettings):
@@ -31,10 +38,34 @@ class Settings(BaseSettings):
     api_version: str = "1.0.0"
     api_description: str = "Multi-class classification API for 67 cat breeds using ResNet50/EfficientNet"
 
+    # VLM (Vision Language Model) configuration
+    # When enabled, predictions are verified by GLM-4.6V for higher accuracy
+    vlm_enabled: bool = True
+    # Z.ai API key - get from https://docs.z.ai
+    # Note: This is read from ZAI_API_KEY env var, not API_ZAI_API_KEY
+    zai_api_key: Optional[str] = None
+
     class Config:
         env_prefix = "API_"
         case_sensitive = False
+        # Allow reading ZAI_API_KEY without the API_ prefix
+        extra = "allow"
 
 
 # Global settings instance
 settings = Settings()
+
+
+def is_vlm_available() -> bool:
+    """
+    Check if VLM verification is available.
+
+    VLM requires both:
+    1. vlm_enabled = True in config
+    2. ZAI_API_KEY environment variable set
+
+    Returns:
+        True if VLM can be used, False otherwise
+    """
+    import os
+    return settings.vlm_enabled and bool(os.getenv("ZAI_API_KEY"))

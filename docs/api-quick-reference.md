@@ -13,13 +13,19 @@
 
 ## Configuration
 
-**Environment Variables (API_ prefix):**
+**Model & Server (API_ prefix):**
 ```bash
 API_CHECKPOINT_PATH=outputs/checkpoints/fold_0/best_model.pt
 API_MODEL_NAME=resnet50
 API_DEVICE=auto  # auto|cuda|mps|cpu
 API_PORT=8000
 API_HOST=0.0.0.0
+```
+
+**VLM Integration (NEW):**
+```bash
+API_VLM_ENABLED=true          # Enable/disable GLM-4.6V verification
+ZAI_API_KEY=your-api-key      # Z.ai API key (get from https://docs.z.ai)
 ```
 
 ## Start API
@@ -36,11 +42,12 @@ python -m uvicorn api.main:app --reload
 
 # Or run by category
 pytest tests/api/ -v                                  # All tests
-pytest tests/api/test_image_service.py -v            # Image validation (15 tests)
 pytest tests/api/test_health.py -v                   # Health checks (4 tests)
-pytest tests/api/test_predict.py -v                  # Predictions (10 tests)
+pytest tests/api/test_image_service.py -v            # Image validation (15 tests)
 pytest tests/api/test_model.py -v                    # Model info (6 tests)
 pytest tests/api/test_inference_service.py -v        # Inference (5 tests)
+pytest tests/api/test_predict.py -v                  # Predictions (10 tests)
+pytest tests/api/test_vlm_service.py -v              # VLM verification (40+ tests)
 
 # Coverage report
 pytest tests/api/ --cov=api --cov-report=html
@@ -61,10 +68,11 @@ curl -X POST "http://localhost:8000/api/v1/predict" \
 | Component | File | Role | Phase |
 |-----------|------|------|-------|
 | **App** | `api/main.py` | FastAPI app, lifecycle, exception handlers | 01/02 |
-| **Config** | `api/config.py` | Pydantic settings | 01 |
+| **Config** | `api/config.py` | Pydantic settings, VLM config | 01/VLM |
 | **Manager** | `api/services/model_service.py` | Model singleton | 01 |
 | **Health** | `api/routers/health.py` | Health probes | 01 |
 | **ImageService** | `api/services/image_service.py` | Validation & preprocessing | 02 |
+| **VLMService** | `api/services/vlm_service.py` | GLM-4.6V breed verification | VLM |
 | **Dependencies** | `api/dependencies.py` | DI factories | 02 |
 | **Exceptions** | `api/exceptions.py` | Custom HTTP exceptions | 02 |
 | **Models** | `api/models.py` | Pydantic schemas | 03 |
@@ -102,6 +110,28 @@ tensor, metadata = await image_service.validate_and_preprocess(file)
 4. Dimensions (16-10000px)
 5. Pixel loading (decompression bomb protection)
 
+## VLMService (GLM-4.6V Integration)
+
+```python
+from api.services.vlm_service import VLMService
+from api.config import is_vlm_available
+
+# Check if VLM is available
+if is_vlm_available():
+    service = VLMService.get_instance()
+    status, prediction, reasoning = service.verify_prediction(
+        image_path="cat.jpg",
+        cnn_top_3=[("Persian", 0.85), ("Himalayan", 0.10), ("Exotic", 0.03)]
+    )
+    # status: "agree"|"disagree"|"unclear"|"error"
+```
+
+**Status Return Values:**
+- `"agree"` - VLM confirms CNN's top-1 prediction
+- `"disagree"` - VLM suggests different breed
+- `"unclear"` - Could not parse VLM response
+- `"error"` - API failed (falls back to CNN)
+
 ## Security Features
 
 **Phase 01:**
@@ -117,6 +147,13 @@ tensor, metadata = await image_service.validate_and_preprocess(file)
 - ✓ Memory exhaustion defense
 - ✓ Type-safe metadata (TypedDict)
 
+**VLM Integration:**
+- ✓ API key via environment variables (never hardcoded)
+- ✓ Singleton pattern with thread-safe initialization
+- ✓ Graceful error handling with CNN fallback
+- ✓ Base64 image encoding (no unencrypted transfer)
+- ✓ Response validation with structured parsing
+
 ## Documentation
 
 - **Phase 01:** `docs/api-phase01.md` - Core API & Model Loading ✓
@@ -124,9 +161,10 @@ tensor, metadata = await image_service.validate_and_preprocess(file)
 - **Phase 03:** `docs/api-phase03.md` - Inference Endpoint Implementation ✓
 - **Phase 04:** `docs/api-phase04.md` - Response Formatting & Metrics
 - **Phase 05:** `docs/api-phase05.md` - Testing & Validation ✓
+- **VLM Integration:** `docs/api-vlm-integration.md` - GLM-4.6V Breed Verification ✓
 - **Testing Guide:** `docs/testing-guide.md`
 - **Interactive Docs:** http://localhost:8000/docs
 
 ---
 
-**Phase 05 Status:** Complete (40 tests, 89% coverage, production-ready)
+**Current Status:** Phase 05 complete + VLM integration (40+ VLM tests, production-ready)
