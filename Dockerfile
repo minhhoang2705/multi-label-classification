@@ -50,7 +50,7 @@ USER appuser
 # Environment variables
 ENV PYTHONUNBUFFERED=1 \
     PATH=/home/appuser/.local/bin:$PATH \
-    API_CHECKPOINT_PATH=outputs/checkpoints/fold_0/best_model.pt \
+    API_CHECKPOINT_PATH=outputs/checkpoints/fold_2/best_model.pt \
     API_HOST=0.0.0.0 \
     API_PORT=8000
 

@@ -7,12 +7,12 @@
     },
     {
       "rank": 2,
-      "class": "Canadian Hairless",
+      "class": "Burmilla",
       "f1_score": 0.0
     },
     {
       "rank": 3,
-      "class": "Chausie",
+      "class": "Canadian Hairless",
       "f1_score": 0.0
     },
     {
@@ -27,7 +27,7 @@
     },
     {
       "rank": 6,
-      "class": "LaPerm",
+      "class": "Oriental Long Hair",
       "f1_score": 0.0
     },
     {
@@ -37,70 +37,70 @@
     },
     {
       "rank": 8,
-      "class": "Oriental Long Hair",
-      "f1_score": 0.25
+      "class": "Chausie",
+      "f1_score": 0.3333333333333333
     },
     {
       "rank": 9,
-      "class": "Javanese",
+      "class": "Japanese Bobtail",
       "f1_score": 0.3333333333333333
     },
     {
       "rank": 10,
-      "class": "Silver",
-      "f1_score": 0.4166666666666667
+      "class": "Ragamuffin",
+      "f1_score": 0.5454545454545454
     }
   ],
   "best_performing": [
     {
       "rank": 1,
-      "class": "Sphynx - Hairless Cat",
-      "f1_score": 0.9879518072289156
+      "class": "Cornish Rex",
+      "f1_score": 0.9705882352941176
     },
     {
       "rank": 2,
-      "class": "Cornish Rex",
-      "f1_score": 0.9855072463768116
+      "class": "Selkirk Rex",
+      "f1_score": 0.967741935483871
     },
     {
       "rank": 3,
-      "class": "Persian",
-      "f1_score": 0.9649122807017544
+      "class": "Sphynx - Hairless Cat",
+      "f1_score": 0.9523809523809523
     },
     {
       "rank": 4,
-      "class": "Scottish Fold",
-      "f1_score": 0.948051948051948
+      "class": "Persian",
+      "f1_score": 0.9438902743142145
     },
     {
       "rank": 5,
-      "class": "Bengal",
-      "f1_score": 0.934409687184662
+      "class": "Scottish Fold",
+      "f1_score": 0.9251700680272109
     },
     {
       "rank": 6,
-      "class": "Selkirk Rex",
-      "f1_score": 0.9285714285714286
+      "class": "Somali",
+      "f1_score": 0.9230769230769231
     },
     {
       "rank": 7,
-      "class": "Russian Blue",
-      "f1_score": 0.9228687415426252
+      "class": "Bengal",
+      "f1_score": 0.9188640973630832
     },
     {
       "rank": 8,
       "class": "Domestic Short Hair",
-      "f1_score": 0.9227816461346188
+      "f1_score": 0.9107588172426078
     },
     {
       "rank": 9,
-      "class": "Siamese",
-      "f1_score": 0.9095519864750634
+      "class": "Russian Blue",
+      "f1_score": 0.900804289544236
     },
     {
       "rank": 10,
-      "class": "Devon Rex",
-      "f1_score": 0.9090909090909091
+      "class": "Siamese",
+      "f1_score": 0.8979933110367893
     }
   ]
 }

@@ -28,8 +28,8 @@ services:
 
     # Environment variables (from .env file)
     environment:
-      - API_CHECKPOINT_PATH=${API_CHECKPOINT_PATH:-outputs/checkpoints/fold_0/best_model.pt}
-      - API_MODEL_NAME=${API_MODEL_NAME:-resnet50}
+      - API_CHECKPOINT_PATH=${API_CHECKPOINT_PATH:-outputs/checkpoints/fold_2/best_model.pt}
+      - API_MODEL_NAME=${API_MODEL_NAME:-convnext_base}
       - API_NUM_CLASSES=${API_NUM_CLASSES:-67}
       - API_IMAGE_SIZE=${API_IMAGE_SIZE:-224}
       - API_DEVICE=${API_DEVICE:-auto}
