@@ -21,6 +21,21 @@ logging.basicConfig(
 )
 logger = logging.getLogger(__name__)
 
+# Configure disagreement logger (outputs to JSONL file)
+disagreement_logger = logging.getLogger('disagreements')
+disagreement_logger.setLevel(logging.INFO)
+# Create logs directory if it doesn't exist
+import os
+os.makedirs('logs', exist_ok=True)
+# Add file handler for JSONL output
+disagreement_handler = logging.FileHandler('logs/disagreements.jsonl')
+disagreement_handler.setLevel(logging.INFO)
+# Simple format - just the message (already JSON)
+disagreement_handler.setFormatter(logging.Formatter('%(message)s'))
+disagreement_logger.addHandler(disagreement_handler)
+# Don't propagate to root logger (avoid double logging)
+disagreement_logger.propagate = False
+
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):

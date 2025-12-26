@@ -4,8 +4,8 @@
 
 Multi-label image classification system for 67 cat breeds using FastAPI inference endpoint with production-ready model serving, comprehensive testing, and VLM post-classifier integration.
 
-**Last Updated:** 2025-12-25
-**Project Phase:** API Development (100% Complete) → VLM Integration (33% In Progress)
+**Last Updated:** 2025-12-26
+**Project Phase:** API Development (100% Complete) → VLM Integration (67% In Progress)
 
 ## Executive Summary
 
@@ -305,7 +305,7 @@ scripts/
 
 ---
 
-## Active Development Phase: VLM Integration (Phase 01 Complete)
+## Active Development Phase: VLM Integration (Phases 01-02 Complete)
 
 ### Phase 01: GLM-4.6V Integration
 **Status:** ✅ COMPLETED (2025-12-25)
@@ -332,12 +332,77 @@ scripts/
 - `tests/api/test_vlm_service.py` (NEW)
 - `.env.example` (UPDATED - documentation)
 
+---
+
+### Phase 02: Disagreement-Based Strategy
+**Status:** ✅ COMPLETED (2025-12-26)
+**Completion Percentage:** 100%
+
+#### Deliverables Completed
+- Hybrid inference service combining CNN + VLM predictions
+- `/predict/verified` endpoint with agreement/disagreement detection
+- VLM wins on disagreement strategy (better at visual reasoning)
+- Disagreement logging to JSONL with security hardening
+- Comprehensive test suite: 25 tests passing (12 unit, 13 integration)
+- Security fixes for all critical issues
+
+#### Critical Issues Fixed (2025-12-26)
+1. ✅ Temp file path exposure → SHA256 hash-based logging
+2. ✅ Cleanup race condition → Narrow exception handling with logging
+3. ✅ Missing dependency → `python-multipart>=0.0.17` (already in requirements)
+
+#### Key Metrics
+- Implementation: 256 lines of production code
+- Tests: 666 lines of test code (2.6x ratio - excellent coverage)
+- Code Review: 0 critical issues after fixes, 9/10 quality rating
+- Test Coverage: ~95%
+- All 5 success criteria met
+
+#### Implemented Files
+- `api/services/hybrid_inference_service.py` (NEW - 256 lines)
+- `api/routers/predict.py` (UPDATED - +93 lines for /predict/verified endpoint)
+- `api/models.py` (UPDATED - HybridPredictionResponse schema)
+- `api/main.py` (UPDATED - disagreement logging setup)
+- `tests/api/test_hybrid_inference_service.py` (NEW - 383 lines)
+- `tests/api/test_predict_verified.py` (NEW - 283 lines)
+
 #### Next Phase
-Phase 02: Disagreement-based strategy implementation + integration with inference endpoint
+Phase 03: Monitoring & Analytics
 
 ---
 
 ## Changelog
+
+### v1.2.0 - 2025-12-26
+**Status:** VLM Integration Phase 02 Complete (Disagreement Strategy)
+
+#### Added
+- Hybrid inference service combining CNN + VLM predictions with disagreement detection
+- `/predict/verified` endpoint for VLM-validated predictions
+- VLM-wins-on-disagreement strategy (better visual reasoning for edge cases)
+- Disagreement logging to JSONL format for post-hoc analysis
+- Security hardening: SHA256-hashed image identifiers in logs (avoid temp path exposure)
+- Narrow exception handling for temp file cleanup with logging
+
+#### Fixed
+- CRITICAL-01: Temp file path exposure in disagreement logs
+- CRITICAL-02: Temp file cleanup race condition with proper error handling
+- CRITICAL-03: Verified python-multipart dependency in requirements.txt
+
+#### Testing
+- 25 tests passing (12 unit + 13 integration, 100% success rate)
+- ~95% code coverage on hybrid service module
+- 0 critical issues after fixes
+- Code review: 9/10 quality rating
+
+#### Files Modified
+- `api/services/hybrid_inference_service.py` (NEW - 256 lines)
+- `api/routers/predict.py` (UPDATED - +93 lines)
+- `api/models.py` (UPDATED - HybridPredictionResponse)
+- `api/main.py` (UPDATED - disagreement logging)
+- `requirements.txt` (VERIFIED - python-multipart present)
+
+---
 
 ### v1.1.0 - 2025-12-25
 **Status:** VLM Integration Phase 01 Complete

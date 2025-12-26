@@ -92,3 +92,49 @@ class ClassListResponse(BaseModel):
     """List of supported classes."""
     num_classes: int
     classes: List[ClassInfo]
+
+
+class HybridPredictionResponse(BaseModel):
+    """
+    Response for hybrid CNN + VLM prediction with verification status.
+
+    This response combines predictions from both the CNN classifier and
+    VLM (Vision Language Model). The final prediction uses VLM's choice
+    when there's disagreement, as VLMs are better at visual reasoning.
+    """
+    # Final result (VLM when disagreeing)
+    predicted_class: str = Field(..., description="Final predicted breed")
+    confidence_level: str = Field(
+        ...,
+        description="Confidence level: 'high' (verified), 'medium' (uncertain), 'low' (cnn_only/error)"
+    )
+    verification_status: str = Field(
+        ...,
+        description="Status: 'verified' (agree), 'uncertain' (disagree), 'cnn_only', 'unclear', 'error'"
+    )
+
+    # CNN details
+    cnn_prediction: str = Field(..., description="CNN's top prediction")
+    cnn_confidence: float = Field(..., description="CNN confidence score (0-1)")
+    top_5_predictions: List[PredictionItem] = Field(
+        ..., description="CNN's top 5 predictions"
+    )
+
+    # VLM details (optional - may be None if VLM disabled/failed)
+    vlm_prediction: Optional[str] = Field(None, description="VLM's breed prediction")
+    vlm_reasoning: Optional[str] = Field(
+        None,
+        description="VLM's reasoning about visual features"
+    )
+
+    # Timing breakdown
+    cnn_time_ms: float = Field(..., description="CNN inference time (ms)")
+    vlm_time_ms: Optional[float] = Field(None, description="VLM inference time (ms)")
+    total_time_ms: float = Field(..., description="Total processing time (ms)")
+
+    # Metadata
+    image_metadata: ImageMetadata
+    model_info: dict = Field(
+        default_factory=dict,
+        description="Model information (CNN model, VLM model, device)"
+    )
